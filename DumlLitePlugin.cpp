@@ -120,6 +120,12 @@ bool DumlLiteFrameFactory::findNextFrame()
    int dumlFrameLength = ( theDataBytes[2] << 8) | theDataBytes[1];
    dumlFrameLength &= 0x03ff;
 
+   if (dumlFrameLength < 13)
+   {
+      dlDebug() << "Begining of frame found, but total frame length too short";
+      return false;
+   }
+
    if (dumlFrameLength > theDataBytes.length())
    {
       dlDebug() << "We have DUML Frame Header, DUML length = " << dumlFrameLength
