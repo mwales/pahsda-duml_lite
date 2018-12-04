@@ -34,9 +34,17 @@ public:
 
 protected:
 
+   static const uint8_t theCrc8Table[256];
+
+   static const uint16_t theCrc16Table[256];
+
    void findFrames();
 
    bool findNextFrame();
+
+   uint8_t calcCrc8(uint8_t* buffer, int length);
+
+   uint16_t calcCrc16(uint8_t* buffer, int length);
 
    QByteArray theDataBytes;
 
@@ -45,6 +53,12 @@ protected:
    int theTotalBytesReceived;
 
    int theTotalBytesFramed;
+
+   int theCrc8Rejections;
+
+   int theCrc16Rejections;
+
+   int theFrameLengthRejections;
 
    QList<DumlFrame*> theFrames;
 };
