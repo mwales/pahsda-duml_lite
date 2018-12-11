@@ -251,13 +251,13 @@ bool DumlLiteFrameFactory::findNextFrame()
       QString matchResult = (crc16Match ? "MATCH" : "DOES NOT MATCH");
 
       // dlDebug() << "Calc CRC16 = " << QString::number((int) calculatedCrc16, 16) << matchResult
-      //           << "Frame CRC16 = " << crc16BytesFromFrame.toHex(' ');
+      //           << "Frame CRC16 = " << Helpers::qbyteToHexString(crc16BytesFromFrame);
 
       if (!crc16Match)
       {
          // Reject the SOF byte
          dlDebug() << "Calc CRC16 = " << QString::number((int) calculatedCrc16, 16) << matchResult
-                   << "Frame CRC16 = " << crc16BytesFromFrame.toHex(' ');
+                   << "Frame CRC16 = " << Helpers::qbyteToHexString(crc16BytesFromFrame);
 
          theCrc16Rejections++;
          theDataBytes = theDataBytes.mid(1);
