@@ -5,7 +5,7 @@
 #include "Helpers.h"
 
 // Uncomment to enable debugging of this class
-// #define DUML_LITE_FF_DEBUG
+#define DUML_LITE_FF_DEBUG
 
 #ifdef DUML_LITE_FF_DEBUG
    #define dlDebug qDebug
@@ -202,11 +202,11 @@ bool DumlLiteFrameFactory::findNextFrame()
       uint8_t calculatedCrc = calcCrc8( (uint8_t*) theDataBytes.data(), 3);
       // dlDebug() << "Calc CRC = " << (int) calculatedCrc << ", framed CRC = " << (int) theDataBytes[3];
 
-      if ( (int) calculatedCrc != (int) theDataBytes[3])
+      if ( calculatedCrc != (uint8_t) theDataBytes[3])
       {
          // Reject the SOF byte
-         dlDebug() << "Calc CRC = " << (int) calculatedCrc << " does not match framed CRC = "
-                   << (int) theDataBytes[3];
+         qDebug() << "Calc CRC = " << (unsigned int) calculatedCrc << " does not match framed CRC = "
+                   << (unsigned int) theDataBytes[3];
 
          theCrc8Rejections++;
          theDataBytes = theDataBytes.mid(1);
